@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qm.learnmybatis.mapper.StudentMapper">
+
+    <resultMap id="BaseResultMap" type="com.qm.learnmybatis.entity.Student">
+        <id property="id" column="id" jdbcType="BIGINT"/>
+        <result property="name" column="name" jdbcType="VARCHAR"/>
+        <result property="age" column="age" jdbcType="INTEGER"/>
+        <result property="grade" column="grade" jdbcType="VARCHAR"/>
+        <result property="email" column="email" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <select id="selectById" resultMap="BaseResultMap">
+        SELECT id, name, age, grade, email FROM student WHERE id = #{id}
+    </select>
+
+    <select id="selectAll" resultMap="BaseResultMap">
+        SELECT id, name, age, grade, email FROM student
+    </select>
+
+    <insert id="insert" parameterType="com.qm.learnmybatis.entity.Student" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO student (name, age, grade, email)
+        VALUES (#{name}, #{age}, #{grade}, #{email})
+    </insert>
+
+    <update id="update" parameterType="com.qm.learnmybatis.entity.Student">
+        UPDATE student
+        SET name = #{name}, age = #{age}, grade = #{grade}, email = #{email}
+        WHERE id = #{id}
+    </update>
+
+    <delete id="deleteById">
+        DELETE FROM student WHERE id = #{id}
+    </delete>
+</mapper>
